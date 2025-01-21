@@ -16,10 +16,10 @@ jobs:
     strategy:
       matrix:
         node-version: [16, 18] # Test on multiple Node.js versions
-    env:
-      MONGO_URI: ${{ secrets.MONGO_URI }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      PORT: ${{ secrets.PORT }}
+
+
+
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
@@ -30,6 +30,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Print Env Secret
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        PORT: ${{ secrets.PORT }}
+      run: | 
+        echo "Secret 1 is: $MONGO_URI"
+        echo "Secret 2 is: $JWT_SECRET"
+        echo "Secret 3 is: $PORT"
+
     # Install dependencies for backend
     - name: Install Backend Dependencies
       working-directory: ./backend
@@ -37,6 +47,10 @@ jobs:
 
     # Run backend tests
     - name: Run Backend Tests
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        PORT: ${{ secrets.PORT }}
       working-directory: ./backend
       run: npm test
 

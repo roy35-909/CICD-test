@@ -38,8 +38,11 @@ after(async () => {
 });
 
 describe('Backend API Tests', () => {
+
+
   it('should return 200 for the root route', async () => {
     const res = await chai.request(`http://localhost:${port}`).get('/');
-    expect(res).to.have.status(404);
+    expect(res).to.have.status(200);
   });
+
 });

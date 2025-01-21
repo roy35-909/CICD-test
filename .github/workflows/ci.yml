@@ -18,7 +18,7 @@ jobs:
         node-version: [16, 18] # Test on multiple Node.js versions
 
 
-
+    environment: MONGO_URI
 
     steps:
     - name: Checkout Code
@@ -31,6 +31,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Print Env Secret
+
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         JWT_SECRET: ${{ secrets.JWT_SECRET }}

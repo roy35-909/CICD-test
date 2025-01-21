@@ -16,7 +16,10 @@ jobs:
     strategy:
       matrix:
         node-version: [16, 18] # Test on multiple Node.js versions
-
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      PORT: ${{ secrets.PORT }}
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3

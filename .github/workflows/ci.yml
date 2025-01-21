@@ -1,0 +1,41 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - main  # Trigger CI on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger CI on pull requests to the main branch
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16, 18] # Test on multiple Node.js versions
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Set up Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    # Install dependencies for backend
+    - name: Install Backend Dependencies
+      working-directory: ./backend
+      run: npm install
+
+    # Run backend tests
+    - name: Run Backend Tests
+      working-directory: ./backend
+      run: npm test
+
+
+ 

@@ -58,8 +58,9 @@ jobs:
 
     - run: npm ci
     - run: | 
+        cd ./backend
         touch .env
-        echo "{{ secrets.MONGO_URI }}" > .env
+        echo "${{ secrets.MONGO_URI }}" > .env
     - run: pm2 restart all
 
 

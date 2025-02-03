@@ -45,6 +45,10 @@ jobs:
     - name: Install Backend Dependencies
       working-directory: ./backend
       run: npm install
+    # Install dependencies for frontend
+    - name: Install Frontend Dependencies
+      working-directory: ./frontend
+      run: yarn install
 
     # Run backend tests
     - name: Run Backend Tests
@@ -62,9 +66,3 @@ jobs:
         touch .env
         echo "${{ secrets.PROD }}" > .env
     - run: pm2 restart all
-
-
-
-  
-
- 

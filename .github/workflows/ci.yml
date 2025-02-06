@@ -40,7 +40,7 @@ jobs:
         echo "Secret 1 is: $MONGO_URI"
         echo "Secret 2 is: $JWT_SECRET"
         echo "Secret 3 is: $PORT"
-        pm2 stop all
+
 
     # Install dependencies for backend
     - name: Install Backend Dependencies
@@ -53,7 +53,10 @@ jobs:
     # Install dependencies for frontend
     - name: Install Frontend Dependencies
       working-directory: ./frontend
-      run: yarn install
+      run: |
+        yarn install
+        npm run build
+
 
     # Run backend tests
     - name: Run Backend Tests
@@ -70,5 +73,5 @@ jobs:
         cd ./backend
         touch .env
         echo "${{ secrets.PROD }}" > .env
-        pm2 start all
-    - run: pm2 restart all
+
+    # - run: pm2 restart all

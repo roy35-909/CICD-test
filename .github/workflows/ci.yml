@@ -56,7 +56,7 @@ jobs:
       working-directory: ./frontend
       run: |
         yarn install
-        npm run build
+        yarn run build
 
 
     # Run backend tests
